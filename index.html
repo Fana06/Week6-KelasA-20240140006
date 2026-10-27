@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PPAW Week 6 – Fetch API, DOM & Event Handling</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>PPAW Week 6</h1>
+    <p>JavaScript DOM, Event Handling, dan Fetch API</p>
+    <nav aria-label="Navigasi halaman">
+      <a href="#produk">Data Produk</a>
+      <a href="#form">Form Pendaftaran</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============ 1. FETCH API ============ -->
+    <section id="produk" class="panel" aria-labelledby="judul-produk">
+      <div class="panel-head">
+        <h2 id="judul-produk">Data Produk</h2>
+        <p>Diambil langsung dari <code>dummyjson.com/products</code> dengan Fetch API.</p>
+      </div>
+
+      <div class="toolbar">
+        <label for="cari-produk">Cari produk</label>
+        <input type="search" id="cari-produk" placeholder="Ketik nama produk…" autocomplete="off" disabled>
+        <span id="jumlah-produk" class="muted" aria-live="polite"></span>
+      </div>
+
+      <!-- Status loading & error -->
+      <div id="status-loading" class="status" role="status" hidden>
+        <span class="spinner" aria-hidden="true"></span> Memuat data produk…
+      </div>
+      <div id="status-error" class="status status-error" role="alert" hidden>
+        <p id="pesan-error"></p>
+        <button type="button" id="btn-coba-lagi">Coba lagi</button>
+      </div>
+
+      <ul id="daftar-produk" class="grid-produk"></ul>
+    </section>
+
+    <!-- ============ 2. FORM DOM & EVENT ============ -->
+    <section id="form" class="panel" aria-labelledby="judul-form">
+      <div class="panel-head">
+        <h2 id="judul-form">Pendaftaran Workshop Web</h2>
+        <p>Isi data di bawah. Validasi berjalan saat kamu mengetik dan saat form dikirim.</p>
+      </div>
+
+      <div class="form-layout">
+        <form id="form-daftar" novalidate>
+          <div class="field">
+            <label for="nama">Nama lengkap</label>
+            <input type="text" id="nama" name="nama" autocomplete="name">
+            <small class="error-msg" id="err-nama" aria-live="polite"></small>
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email">
+            <small class="error-msg" id="err-email" aria-live="polite"></small>
+          </div>
+
+          <div class="field">
+            <label for="nim">NIM</label>
+            <input type="text" id="nim" name="nim" inputmode="numeric" maxlength="11" placeholder="11 digit angka">
+            <small class="error-msg" id="err-nim" aria-live="polite"></small>
+          </div>
+
+          <div class="field">
+            <label for="kelas">Kelas</label>
+            <select id="kelas" name="kelas">
+              <option value="">Pilih kelas</option>
+              <option value="A">Kelas A</option>
+              <option value="B">Kelas B</option>
+              <option value="C">Kelas C</option>
+            </select>
+            <small class="error-msg" id="err-kelas" aria-live="polite"></small>
+          </div>
+
+          <div class="field">
+            <label for="pesan">Harapan dari workshop</label>
+            <textarea id="pesan" name="pesan" rows="4" maxlength="150"></textarea>
+            <div class="field-foot">
+              <small class="error-msg" id="err-pesan" aria-live="polite"></small>
+              <small class="muted" id="hitung-pesan">0 / 150</small>
+            </div>
+          </div>
+
+          <div class="field field-check">
+            <input type="checkbox" id="setuju" name="setuju">
+            <label for="setuju">Data yang saya isi sudah benar</label>
+            <small class="error-msg" id="err-setuju" aria-live="polite"></small>
+          </div>
+
+          <div class="actions">
+            <button type="submit" id="btn-kirim">Daftar</button>
+            <button type="reset" id="btn-reset" class="btn-ghost">Kosongkan</button>
+          </div>
+        </form>
+
+        <aside aria-labelledby="judul-hasil">
+          <h3 id="judul-hasil">Peserta terdaftar</h3>
+          <div id="feedback" class="feedback" role="status" hidden></div>
+          <p id="kosong-peserta" class="muted">Belum ada peserta. Kirim form untuk menambahkan.</p>
+          <ul id="daftar-peserta" class="peserta"></ul>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Tugas individu PPAW Week 6</p>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/form.js"></script>
+</body>
+</html>
